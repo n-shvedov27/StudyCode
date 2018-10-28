@@ -1,0 +1,247 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Business Template</title>
+    <link rel="stylesheet" href="/static/css/foundation.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/slick/slick.css"/>
+    <link rel="stylesheet" href="/static/css/style.css"/>
+    <link rel="stylesheet" href="/static/css/responsive.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+    <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+    <script src="/static/js/vendor/modernizr.js"></script>
+</head>
+<body>
+
+<div class="row">
+    <div class="large-4 medium-4 small-12 columns">
+        <div id="logo"><a href="/"><img src="/static/media/img/for_pages/logo.png" alt="Conmpany Name"></a>
+        </div>
+    </div>
+    <div class="large-8 medium-8 small-12 columns">
+        <nav class="top-bar" data-topbar role="navigation">
+            <ul class="title-area">
+                <li class="name"></li>
+                <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+
+            <section class="top-bar-section">
+                <!-- Right Nav Section -->
+                <ul class="right">
+                    <li class="active"><a href="/">Домой</a></li>
+                    <li><a href="/about_us">О нас</a></li>
+                    <li><a href="/ask">Вопросы</a></li>
+                </ul>
+                </li>
+                </ul>
+            </section>
+        </nav>
+    </div>
+</div>
+
+
+<div class="slider-sec">
+
+    <div class="slider single-item">
+        <div><img src="/static/media/img/for_pages/slide1.jpg" alt=" "/></div>
+        <div><img src="/static/media/img/for_pages/slide2.jpg" alt=" "/></div>
+    </div>
+    <div class="row">
+        <div class="large-12 columns no-pad">
+            <div class="banner-txt"><h1>Школа программирования<br/>для детей от 6 лет</h1>
+                <button onclick="document.getElementById('id01').style.display='block'" class="button round">Записаться в школу</button>
+            </div>
+        </div>
+    </div>
+    <link type="text/css" rel="stylesheet" href="/static/css/popup.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/select.css">
+    <div id="id01" class="modal">
+
+        <form class="modal-content animate" method="post" action="/contact">
+            {% csrf_token %}
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <img src="/static/media/img/for_pages/img_avatar2.png" alt="Avatar" class="avatar">
+            </div>
+
+            <div class="container">
+                <label for="uname"><b>Направление подготовки:</b></label>
+
+
+                <div class="custom-select">
+                    <select name="direct_way">
+                        <option value="0">Не определился:</option>
+                        <option value="0">Мобильная разработка:</option>
+                        <option value="1">Веб-разработка</option>
+                    </select>
+                </div>
+
+                <script>
+                    var x, i, j, selElmnt, a, b, c;
+                    /*look for any elements with the class "custom-select":*/
+                    x = document.getElementsByClassName("custom-select");
+                    for (i = 0; i < x.length; i++) {
+                        selElmnt = x[i].getElementsByTagName("select")[0];
+                        /*for each element, create a new DIV that will act as the selected item:*/
+                        a = document.createElement("DIV");
+                        a.setAttribute("class", "select-selected");
+                        a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+                        x[i].appendChild(a);
+                        /*for each element, create a new DIV that will contain the option list:*/
+                        b = document.createElement("DIV");
+                        b.setAttribute("class", "select-items select-hide");
+                        for (j = 0; j < selElmnt.length; j++) {
+                            /*for each option in the original select element,
+                            create a new DIV that will act as an option item:*/
+                            c = document.createElement("DIV");
+                            c.innerHTML = selElmnt.options[j].innerHTML;
+                            c.addEventListener("click", function (e) {
+                                /*when an item is clicked, update the original select box,
+                                and the selected item:*/
+                                var y, i, k, s, h;
+                                s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+                                h = this.parentNode.previousSibling;
+                                for (i = 0; i < s.length; i++) {
+                                    if (s.options[i].innerHTML == this.innerHTML) {
+                                        s.selectedIndex = i;
+                                        h.innerHTML = this.innerHTML;
+                                        y = this.parentNode.getElementsByClassName("same-as-selected");
+                                        for (k = 0; k < y.length; k++) {
+                                            y[k].removeAttribute("class");
+                                        }
+                                        this.setAttribute("class", "same-as-selected");
+                                        break;
+                                    }
+                                }
+                                h.click();
+                            });
+                            b.appendChild(c);
+                        }
+                        x[i].appendChild(b);
+                        a.addEventListener("click", function (e) {
+                            /*when the select box is clicked, close any other select boxes,
+                            and open/close the current select box:*/
+                            e.stopPropagation();
+                            closeAllSelect(this);
+                            this.nextSibling.classList.toggle("select-hide");
+                            this.classList.toggle("select-arrow-active");
+                        });
+                    }
+
+                    function closeAllSelect(elmnt) {
+                        /*a function that will close all select boxes in the document,
+                        except the current select box:*/
+                        var x, y, i, arrNo = [];
+                        x = document.getElementsByClassName("select-items");
+                        y = document.getElementsByClassName("select-selected");
+                        for (i = 0; i < y.length; i++) {
+                            if (elmnt == y[i]) {
+                                arrNo.push(i)
+                            } else {
+                                y[i].classList.remove("select-arrow-active");
+                            }
+                        }
+                        for (i = 0; i < x.length; i++) {
+                            if (arrNo.indexOf(i)) {
+                                x[i].classList.add("select-hide");
+                            }
+                        }
+                    }
+
+                    /*if the user clicks anywhere outside the select box,
+                    then close all select boxes:*/
+                    document.addEventListener("click", closeAllSelect);
+                </script>
+
+                <label for="uname">Ваше имя</label>
+                <input type="text" placeholder="Введите имя" name="uname" required>
+
+
+                <label for="psw">Ваш email:</label>
+                <input type="email" placeholder="Введите email" name="email" required>
+
+                <button type="submit">Отправить</button>
+            </div>
+
+
+        </form>
+    </div>
+    <script type="text/javascript">
+        $('.single-item').slick();
+    </script>
+</div>
+
+<div class="content-sec">
+    <div class="row">
+        <div class="large-12 columns text-center">
+            <h2>Добро пожаловать в нашу школу</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+                fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                deserunt mollit anim id est laborum.</p>
+            <a href="/about_us" class="button round grey">Узнать больше</a>
+        </div>
+    </div>
+</div>
+
+<div class="services-sec">
+    <div class="row">
+        <div class="large-12 columns"><h2>Направления подготовки</h2></div>
+
+
+        <div class="wwe large-4 medium-4 small-12 columns">
+            <div class="img-box"><img src="/static/media/img/for_pages/service2.jpg" alt="Service1"></div>
+            <div class="txt-box text-center">
+                <h3>Создание сайтов (Веб-разработка)</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua.</p>
+                <a href="lesson/web" class="button radius">Узнать больше</a>
+            </div>
+        </div>
+
+        <div class="wwe large-4 medium-4 small-12 columns">
+            <div class="img-box"><img src="/static/media/img/for_pages/service3.jpg" alt="Service1"></div>
+            <div class="txt-box text-center">
+                <h3>Разработка игр (Game Dev)</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua.</p>
+                <a href="/lesson/mobile" class="button radius">Узнать больше</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="footer-sec">
+    <div class="row">
+
+        <div class="large-2 medium-3 small-12 columns">
+            <div class="foot-1">
+                <div class="social">
+                    <div class="facebook"><a href="#" class="facebook"></a></div>
+                    <div class="twitter"><a href="#" class="twitter"></a></div>
+                    <div class="gplus"><a href="#" class="gplus"></a></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<script src="/static/js/vendor/jquery.js"></script>
+<script src="/static/js/foundation.min.js"></script>
+<script>
+    $(document).foundation();
+</script>
+<script type="text/javascript" src="/static/js/all.js"></script>
+<script type="text/javascript" src="/static/slick/slick.js"></script>
+<script type="text/javascript" src="/static/js/scripts.js"></script>
+
+
+</body>
+</html>
