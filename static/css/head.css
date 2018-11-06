@@ -2,7 +2,9 @@
     font-family: 'Ubuntu', sans-serif;
 }
 
-
+*{
+    color: #000;
+}
 
 body {
     margin: 0;
